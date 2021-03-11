@@ -1,9 +1,13 @@
 package com.example.jetpackjava;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.databinding.DataBindingUtil;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
 import com.example.jetpackjava.databinding.ActivityMain2Binding;
 import com.example.network.ApiResponse;
@@ -28,10 +32,20 @@ private ActivityMain2Binding binding;
         request.execute(new JsonCallback<WokerResponse>() {
             @Override
             public void onSuccess(ApiResponse<WokerResponse> response) {
-                super.onSuccess(response);
                 binding.setUser(new User(response.body.getData().toString(),response.body.toString(),response.status+"",12));
             }
         });
-
+        Handler handler= new Handler(){
+            @Override
+            public void handleMessage(@NonNull Message msg) {
+                super.handleMessage(msg);
+            }
+        };
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0);
+            }
+        }).start();
     }
 }

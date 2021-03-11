@@ -114,11 +114,11 @@ public abstract class MyRequest<T, R extends MyRequest> {
                     result.body = JSON.parseObject(string, argument);
                     ;
                 } else if (mType != null) {
-//                    result.body = (T) JSON.parseObject(string,mType);;
-                    result.body = (T) convert.convert(string, mType);
+                    result.body = (T) JSON.parseObject(string,mType);;
+//                    result.body = (T) convert.convert(string, mType);
                 } else if (mType != null) {
-//                    result.body = (T) JSON.parseObject(string,mCLaz);;
-                    result.body = (T) convert.convert(string, mCLaz);
+                    result.body = (T) JSON.parseObject(string,mCLaz);;
+//                    result.body = (T) convert.convert(string, mCLaz);
                 } else {
                     Log.e("MyRequest：", "parseResponse无法解析");
                 }
