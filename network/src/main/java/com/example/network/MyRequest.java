@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.IntDef;
 
+import com.alibaba.fastjson.JSON;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -100,6 +102,7 @@ public abstract class MyRequest<T, R extends MyRequest> {
         int status = response.code();
         boolean success = response.isSuccessful();
         ApiResponse<T> result = new ApiResponse<>();
+
         Convert convert = ApiService.sConvert;
         try {
             String string = response.body().string();
@@ -107,10 +110,14 @@ public abstract class MyRequest<T, R extends MyRequest> {
                 if (callback != null) {
                     ParameterizedType type = (ParameterizedType) callback.getClass().getGenericSuperclass();
                     Type argument = type.getActualTypeArguments()[0];
-                    result.body = (T) convert.convert(string, argument);
+//                    result.body = (T) convert.convert(string, argument);
+                    result.body = JSON.parseObject(string, argument);
+                    ;
                 } else if (mType != null) {
+//                    result.body = (T) JSON.parseObject(string,mType);;
                     result.body = (T) convert.convert(string, mType);
                 } else if (mType != null) {
+//                    result.body = (T) JSON.parseObject(string,mCLaz);;
                     result.body = (T) convert.convert(string, mCLaz);
                 } else {
                     Log.e("MyRequest：", "parseResponse无法解析");

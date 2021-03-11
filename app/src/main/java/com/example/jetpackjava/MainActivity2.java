@@ -21,14 +21,17 @@ private ActivityMain2Binding binding;
         LifecycleOwner lifecycleOwner = binding.getLifecycleOwner();
 
         binding.setUser(new User("afe","sf","123123123",12));
-        GetRequest<JSONObject> request = new GetRequest<>("http://c.3g.163.com/nc/video/list/VAP4BFR16/y/0-10.html");
+        GetRequest<WokerResponse> request = new GetRequest<>(
+                "http://47.93.215.205:9095/api/homepage/GetSmallTypeById?typeId=5&userId=1044");
 //        request.execute();
-        request.execute(new JsonCallback<JSONObject>() {
+//        binding.setUser(new User(response.message,response.body.toString(),response.status+"",12));
+        request.execute(new JsonCallback<WokerResponse>() {
             @Override
-            public void onSuccess(ApiResponse<JSONObject> response) {
+            public void onSuccess(ApiResponse<WokerResponse> response) {
                 super.onSuccess(response);
-                binding.setUser(new User(response.message,response.body.toString(),response.status+"",12));
+                binding.setUser(new User(response.body.getData().toString(),response.body.toString(),response.status+"",12));
             }
         });
+
     }
 }

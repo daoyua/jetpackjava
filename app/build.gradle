@@ -13,6 +13,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+                }
+            }
     }
 
     buildTypes {
@@ -44,9 +49,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.0.0-rc02'
     implementation 'com.google.android.material:material:1.0.0'
     implementation project(":network")
+    implementation 'androidx.work:work-runtime:2.4.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
-
 
 }

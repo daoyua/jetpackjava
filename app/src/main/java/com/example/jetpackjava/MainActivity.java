@@ -2,6 +2,8 @@ package com.example.jetpackjava;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.example.network.ApiService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        ApiService.init("http://47.93.215.205:9095",null);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
